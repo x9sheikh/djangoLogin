@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% if user.is_authenticated %}
+    <p>Welcome, {{user.username}}</p>
+    <p>location: {{user.profile.location}}</p>
+
+    <form method="post" action="{% url 'logout' %}">
+        {% csrf_token %}
+        <input type="submit" value="logout">
+    </form>
+{% else %}
+    <form method="post" action="{% url 'login' %}">
+        {% csrf_token %}
+        <input type="text" name="username" placeholder="email/username">
+        <input type="password" name="password" placeholder="password">
+        <input type="submit" value="login" >
+    </form>
+    <p>Click<a href="{% url 'signup' %}">Here</a>for Registration</p>
+{% endif %}
+
+
+
+
+</body>
+</html>
